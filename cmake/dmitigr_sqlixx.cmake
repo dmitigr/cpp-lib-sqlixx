@@ -18,7 +18,7 @@
 # Info
 # ------------------------------------------------------------------------------
 
-dmitigr_libs_set_library_info(sqlixx 1 0 0 "SQLite API")
+dmitigr_libs_set_library_info(sqlixx 1 0 1 "SQLite API")
 
 # ------------------------------------------------------------------------------
 # Sources
