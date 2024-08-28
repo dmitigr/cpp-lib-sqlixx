@@ -554,6 +554,28 @@ public:
     return result<T>(column_index_throw(name));
   }
 
+  /**
+   * @brief Gets the result of statement execution to `result`.
+   *
+   * @returns `*this`.
+   *
+   * @see result().
+   */
+  template<typename T>
+  const Statement& get(T& result, const int index) const
+  {
+    result = this->result<T>(index);
+    return *this;
+  }
+
+  /// @overload
+  template<typename T>
+  const Statement& get(T& result, const char* const name) const
+  {
+    result = this->result<T>(name);
+    return *this;
+  }
+
   /// @}
 
 private:

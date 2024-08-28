@@ -53,8 +53,9 @@ int main()
   {
     const auto b = s.result<sqlixx::Blob>("cb");
     const std::string_view cb{static_cast<const char*>(b.data()), b.size()};
-    const auto t1 = s.result<sqlixx::Text_utf8>("ct");
-    const auto t2 = s.result<std::string>("ct");
+    sqlixx::Text_utf8 t1;
+    std::string t2;
+    s.get(t1, "ct").get(t2, "ct");
     const auto t3 = s.result<std::string_view>("ct");
     DMITIGR_ASSERT(!std::strcmp(t1.data(), t2.data()) && (t2 == t3));
     std::cout << "id: " << s.result<int>("id") << "\n"
