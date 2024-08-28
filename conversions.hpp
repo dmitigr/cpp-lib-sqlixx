@@ -44,7 +44,21 @@ inline void check_bind(sqlite3_stmt* const handle, const int r)
 }
 } // namespace detail
 
-/// The centralized "namespace" for data conversions.
+/**
+ * @brief The centralized "namespace" for data conversions.
+ *
+ * @details The following static functions can be defined per specialization:
+ * @code
+ * template<> struct Conversions<T> final {
+ *   static void bind(sqlite3_stmt* stmt, int index, T value);               // 1
+ *   static std::string to_string(const T& value, Types&& ... args);         // 2
+ *   static T to_type(const Data& data, Types&& ... args);                   // 3
+ *   static std::unique_ptr<Data> to_data(const T& value, Types&& ... args); // 4
+ *   static T to_type(const Row& row, Types&& ... args);                     // 5
+ * };
+ * @endcode
+ *
+ */
 template<typename, typename = void> struct Conversions;
 
 /// The implementation of `int` conversions.
@@ -182,10 +196,10 @@ struct Conversions<std::optional<T>> final {
   bind(sqlite3_stmt* const handle, const int index, O&& value)
   {
     if (value) {
-      if constexpr (std::is_rvalue_reference_v<O&&>) {
-        bind(handle, index, std::move(*value));
-      } else
-        bind(handle, index, *value);
+      if constexpr (std::is_rvalue_reference_v<O&&>)
+        Conversions<T>::bind(handle, index, std::move(*value));
+      else
+        Conversions<T>::bind(handle, index, *value);
     } else
       detail::check_bind(handle, sqlite3_bind_null(handle, index));
   }

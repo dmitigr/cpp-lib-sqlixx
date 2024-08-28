@@ -44,6 +44,8 @@ int main()
   s.execute(0, 1.2, std::to_string(3), sqlixx::Blob{"four", 4});
   s.execute(1, 2.3, std::string_view{"four", 4}, sqlixx::Blob{"five", 4});
   s.execute(2, 3.4, sqlixx::Text_utf8{"five", 4}, sqlixx::Blob{"six", 3});
+  s.execute(3, std::make_optional(5.6), sqlixx::Text_utf8{"seven", 5},
+    sqlixx::Blob{"eight", 5});
   c.execute("end");
 
   // Query the test table.
@@ -60,5 +62,5 @@ int main()
               << "ct: " << t3 << "\n"
               << "cb: " << cb << "\n";
   },
-  "select * from tab where id >= ? and id < ?", 0, 3);
+  "select * from tab where id >= ? and id >= ?", 0, 0);
 }
