@@ -46,6 +46,7 @@ int main()
   s.execute(2, 3.4, sqlixx::Text_utf8{"five", 4}, sqlixx::Blob{"six", 3});
   s.execute(3, std::make_optional(5.6), sqlixx::Text_utf8{"seven", 5},
     sqlixx::Blob{"eight", 5});
+  s.execute(4l, 7.8, std::to_string(9), sqlixx::Blob{"nine", 4});
   c.execute("end");
 
   // Query the test table.
