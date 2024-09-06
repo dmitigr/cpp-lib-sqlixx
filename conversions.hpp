@@ -80,9 +80,9 @@ struct Conversions<int> final {
 template <>
 struct Conversions<long int> final {
   static void bind(sqlite3_stmt* const handle, const int index,
-                   const long int value)
+    const long int value)
   {
-    if constexpr(sizeof(long int) == 4)
+    if constexpr(sizeof(long int) == sizeof(int))
       detail::check_bind(handle, sqlite3_bind_int(handle, index, value));
     else
       detail::check_bind(handle, sqlite3_bind_int64(handle, index, value));
@@ -91,7 +91,7 @@ struct Conversions<long int> final {
   static long int result(sqlite3_stmt* const handle, const int index)
   {
     DMITIGR_ASSERT(handle);
-    if constexpr(sizeof(long int) == 4)
+    if constexpr(sizeof(long int) == sizeof(int))
       return sqlite3_column_int(handle, index);
     else
       return sqlite3_column_int64(handle, index);
