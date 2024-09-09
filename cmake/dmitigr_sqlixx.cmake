@@ -31,10 +31,10 @@ set(dmitigr_sqlixx_headers
   errctg.hpp
   exceptions.hpp
   statement.hpp
-  )
+)
 
 set(dmitigr_sqlixx_implementations
-  )
+)
 
 # ------------------------------------------------------------------------------
 # Dependencies
@@ -42,14 +42,12 @@ set(dmitigr_sqlixx_implementations
 
 set(dmitigr_libs_sqlixx_deps base fsx)
 
-if(DMITIGR_LIBS_SQLITE)
-  find_package(SQLite3 REQUIRED)
-  list(APPEND dmitigr_sqlixx_target_include_directories_interface "${SQLite3_INCLUDE_DIRS}")
-  list(APPEND dmitigr_sqlixx_target_link_libraries_interface ${SQLite3_LIBRARIES})
+find_package(SQLite3 REQUIRED)
+list(APPEND dmitigr_sqlixx_target_include_directories_interface "${SQLite3_INCLUDE_DIRS}")
+list(APPEND dmitigr_sqlixx_target_link_libraries_interface ${SQLite3_LIBRARIES})
 
-  if (UNIX)
-    list(APPEND dmitigr_sqlixx_target_link_libraries_interface pthread)
-  endif()
+if (UNIX)
+  list(APPEND dmitigr_sqlixx_target_link_libraries_interface pthread)
 endif()
 
 # ------------------------------------------------------------------------------
