@@ -42,9 +42,13 @@ set(dmitigr_sqlixx_implementations
 
 set(dmitigr_libs_sqlixx_deps base fsx)
 
-find_package(SQLite3 REQUIRED)
-list(APPEND dmitigr_sqlixx_target_include_directories_interface "${SQLite3_INCLUDE_DIRS}")
-list(APPEND dmitigr_sqlixx_target_link_libraries_interface ${SQLite3_LIBRARIES})
+find_package(SQLite3)
+if(SQLite3_FOUND)
+  list(APPEND dmitigr_sqlixx_target_include_directories_interface "${SQLite3_INCLUDE_DIRS}")
+  list(APPEND dmitigr_sqlixx_target_link_libraries_interface ${SQLite3_LIBRARIES})
+else()
+  message(WARNING "SQLite3 not found, relying on manual linkage")
+endif()
 
 if (UNIX)
   list(APPEND dmitigr_sqlixx_target_link_libraries_interface pthread)
