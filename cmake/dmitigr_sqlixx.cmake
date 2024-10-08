@@ -1,6 +1,6 @@
 # -*- cmake -*-
 #
-# Copyright 2023 Dmitry Igrishin
+# Copyright 2024 Dmitry Igrishin
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,12 +42,10 @@ set(dmitigr_sqlixx_implementations
 
 set(dmitigr_libs_sqlixx_deps base fsx)
 
-find_package(SQLite3)
-if(SQLite3_FOUND)
+if(DMITIGR_LIBS_SQLITE3)
+  find_package(SQLite3 REQUIRED)
   list(APPEND dmitigr_sqlixx_target_include_directories_interface "${SQLite3_INCLUDE_DIRS}")
   list(APPEND dmitigr_sqlixx_target_link_libraries_interface ${SQLite3_LIBRARIES})
-else()
-  message(WARNING "SQLite3 not found, relying on manual linkage")
 endif()
 
 if (UNIX)
