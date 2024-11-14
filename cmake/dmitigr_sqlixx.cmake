@@ -58,5 +58,5 @@ endif()
 
 if(DMITIGR_LIBS_TESTS)
   set(dmitigr_sqlixx_tests test)
-  set(dmitigr_sqlixx_tests_target_link_libraries dmitigr_base)
+  list(APPEND dmitigr_sqlixx_tests_target_link_libraries dmitigr_base)
 endif()
