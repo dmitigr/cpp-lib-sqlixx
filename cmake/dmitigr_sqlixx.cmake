@@ -40,7 +40,7 @@ set(dmitigr_sqlixx_implementations
 # Dependencies
 # ------------------------------------------------------------------------------
 
-set(dmitigr_libs_sqlixx_deps base fsx)
+set(dmitigr_libs_sqlixx_deps base)
 
 if(DMITIGR_LIBS_SQLITE3)
   find_package(SQLite3 REQUIRED)

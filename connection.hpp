@@ -18,7 +18,7 @@
 #define DMITIGR_SQLIXX_CONNECTION_HPP
 
 #include "../base/assert.hpp"
-#include "../fsx/filesystem.hpp"
+#include "../base/fsx.hpp"
 #include "statement.hpp"
 
 #include <sqlite3.h>
