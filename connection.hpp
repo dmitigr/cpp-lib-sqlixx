@@ -18,13 +18,13 @@
 #define DMITIGR_SQLIXX_CONNECTION_HPP
 
 #include "../base/assert.hpp"
-#include "../base/fsx.hpp"
 #include "statement.hpp"
 
 #include <sqlite3.h>
 
 #include <cstdio>
 #include <exception>
+#include <filesystem>
 #include <new>
 #include <string>
 #include <string_view>
